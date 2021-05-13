@@ -1,0 +1,63 @@
+spring:
+  profiles: 
+    active: dev
+
+---
+#服务端口
+server:
+  port: 8001
+#数据库连接
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql:///book-user?Unicode=utf8$characterEncoding=utf-8
+    username: root
+    password:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: cloud-provider-boot-user
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        #在consul服务器对外暴露的名称
+        service-name: ${spring.application.name}
+        #主机名称
+        hostname: 127.0.0.1
+        #是否到注册中心注册
+        register: true
+mybatis:
+  type-aliases-package: com.ytl.cloud.pojo
+  mapper-locations: classpath:mapper/*.xml
+  
+---
+#服务端口
+server:
+  port: 8001
+#数据库连接
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:mysql:///book-user?Unicode=utf8$characterEncoding=utf-8
+    username: root
+    password:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: cloud-provider-boot-user
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        #在consul服务器对外暴露的名称
+        service-name: ${spring.application.name}
+        #主机名称
+        hostname: 127.0.0.1
+        #是否到注册中心注册
+        register: true
+mybatis:
+  type-aliases-package: com.ytl.cloud.pojo
+  mapper-locations: classpath:mapper/*.xml
